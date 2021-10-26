@@ -1,5 +1,10 @@
 # Action Sheet Reference Implementation
 
+[![](https://github.com/Mastercard/action-sheet-reference-app/workflows/Build/badge.svg)](https://github.com/Mastercard/action-sheet-reference-app/actions?query=workflow%3A%22Build%22)
+[![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_action-sheet-reference-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=Mastercard_action-sheet-reference-app)
+[![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_action-sheet-reference-app&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Mastercard_action-sheet-reference-app)
+[![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/Mastercard/action-sheet-reference-app/blob/master/LICENSE)
+
 ## Table of Contents
 - [Overview](#overview)
 - [Supported Functionality](#supported-fucntionality)
