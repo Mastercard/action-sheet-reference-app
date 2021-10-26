@@ -1,0 +1,10 @@
+---
+applications:
+  - name: cec-ref-app
+    host: cec-ref-app
+    buildpack: nginx_buildpack
+    memory: 300MB
+    disk_quota: 500MB
+    path: dist/
+    env:
+      DEPLOYMENT_VERSION: 1.0.0

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Action Sheet Reference Implementation</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <main class="main-container" id="mainContent">
+      <div class="checkout-button-wrapper">
+        <button type="button" id="checkoutButton">checkout</button>
+      </div>
+      <div class="iframe-container slide-in" id="iframeContainer">
+        <div class="iframe-foreground">
+          <iframe class="iframe-checkout" id="checkoutIframe" name="checkout-iframe"></iframe>
+        </div>
+        <div class="iframe-background" id="iframeBackground" />
+      </div>
+    </main>
+    <script type="text/javascript" src="./script.js"></script>
+    <script>
+      ;(function () {
+        const fragment = document.createDocumentFragment()
+
+        for (let i = 0, len = 100; i < len; i++) {
+          const testDiv = document.createElement('div')
+          testDiv.innerText = 'some merchant text to test scrolling...'
+
+          fragment.appendChild(testDiv)
+        }
+
+        document.getElementById('mainContent').appendChild(fragment)
+      })()
+    </script>
+  </body>
+</html>
