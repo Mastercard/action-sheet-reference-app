@@ -5,11 +5,13 @@
 [![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_action-sheet-reference-app&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Mastercard_action-sheet-reference-app)
 [![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/Mastercard/action-sheet-reference-app/blob/master/LICENSE)
 
+
 ## Table of Contents
 - [Overview](#overview)
 - [Supported Functionality](#supported-fucntionality)
 - [Frameworks/Libraries](#frameworks)
 - [Required Development](#required-development)
+- [Integration Steps](#integration-steps)
 - [Supported Browsers](#supported-browsers)
 - [Support](#support)
 - [License](#license)
@@ -23,10 +25,10 @@ This is a reference application for Action Sheet UI support for Mastercard SRCI 
 - Demonstrate slide left or right Mastercard SRCi on desktop
 - Display overlay on checkout - overlay should prevent stacked viewport scrolling issues (overscroll-behavior: contain)
 - Provide styling that handles
-   - iframe style (i.e. rounded corners for slide-up)
-   - hide iframe by default (position off-screen at location to be animated from)
-   - animation of iframe in to viewport (triggered by iframe 'load' event)
-   - media queries within styling to determine slide-up/in variant
+    - iframe style (i.e. rounded corners for slide-up)
+    - hide iframe by default (position off-screen at location to be animated from)
+    - animation of iframe in to viewport (triggered by iframe 'load' event)
+    - media queries within styling to determine slide-up/in variant
 - Trigger iframe animation in to viewport (e.g. add CSS class to iframe) based on iframe 'load' event
 - Hide iframe after checkout
 - Hide overlay after checkout
@@ -39,7 +41,7 @@ This is a reference application for Action Sheet UI support for Mastercard SRCI 
 
 The reference application contains below sections -
 
-### index.html 
+### index.html
 - Add checkout button in checkout container
 - Add support iframe/embedded mode in iframe container
 ```
@@ -59,31 +61,31 @@ The reference application contains below sections -
     const iframeBackground = document.getElementById('iframeBackground')
     ```
 - **SRC SDK checkout() method**
-  
-  - Call the checkout() method when checkout button is clicked 
-    ```
-     checkoutButton.addEventListener('click', async () => {
-     });
-     ```
-  - Start checkout by loading SRC/DCF and displaying in iframe
-    ```
-    await checkout({ windowRef: checkoutIframe })
-    ```
-  - Mock SRC SDK checkout method
-    ````
-    window.addEventListener('message', ({ data }) => {
-    if (data === 'CHECKOUT_COMPLETE') resolve()
-    })
-    ````
-  - Simulate SRC checkout method loading SRCi/DCF in to windowRef (iframe)
-     ```
-     windowRef.setAttribute('src', '/mock-srci.html')
-    ```
+
+    - Call the checkout() method when checkout button is clicked
+      ```
+       checkoutButton.addEventListener('click', async () => {
+       });
+       ```
+    - Start checkout by loading SRC/DCF and displaying in iframe
+      ```
+      await checkout({ windowRef: checkoutIframe })
+      ```
+    - Mock SRC SDK checkout method
+      ````
+      window.addEventListener('message', ({ data }) => {
+      if (data === 'CHECKOUT_COMPLETE') resolve()
+      })
+      ````
+    - Simulate SRC checkout method loading SRCi/DCF in to windowRef (iframe)
+       ```
+       windowRef.setAttribute('src', '/mock-srci.html')
+      ```
 
 - **Display/Dismiss iframe**
-  
+
     - Show the iframe once checkout is called
-      
+
       ```
        checkoutIframe.addEventListener('load', showCheckoutIframe, { once: true })
       ```
@@ -91,23 +93,23 @@ The reference application contains below sections -
        iframeContainer.classList.add('show')
        document.body.classList.add('modal-visible')
        ```
-            
+
     - Dismiss the iframe after checkout is finished and clicking the iframe background also dismisses the iframe
 
         ```
          iframeBackground.addEventListener('click', dismissCheckoutIframe)
          ```
-        
+
         ```
         iframeContainer.classList.remove('show')
         document.body.classList.remove('modal-visible')
         ```
-      
+
 ### mock-srci.html
- - Add **Complete Checkout** button
+- Add **Complete Checkout** button
+  ```
+  <button type="button" id="checkoutCompleteButton">COMPLETE CHECKOUT</button>
    ```
-   <button type="button" id="checkoutCompleteButton">COMPLETE CHECKOUT</button>
-    ```
 
 - On click of button **postMessage** is sent to parent window
   ```
@@ -117,9 +119,24 @@ The reference application contains below sections -
     ```
 **Note:** In real case scenario,this will be an actual SRCi/DCF file.
 
+### style.css
+- Opening the iframe with transition/animation effect
+- Styling the iframe
+- Showing the iframe background
+
+
 ### Run Application
 
 Open index.html file on the browser to run the application.
+
+## Integration Steps <a name="integration-steps"></a>
+
+- Include **iframe-container** and **iframe-foreground** template in the html file where the SRC is getting invoked.
+- In the **checkout method** call, you need to **load the iframe** using addEventListener() and add the **show class** to the iframe container using classList.add() property.
+- Optionally, you can also define the **click event** on the **iframe background** using addEventListener() to handle the **dismiss of iframe** inside the checkout method.
+- Create **iframe window reference** using contentWindow property to pass in the **checkout method as parameter**.
+- Add the required **css** to provide transition/animation effect for opening and styling the iframe.
+- Run the application to see iframe getting loaded for performing the checkout.
 
 
 ## Supported Browsers <a name="supported-browsers"></a>
